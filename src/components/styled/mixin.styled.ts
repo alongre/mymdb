@@ -3,9 +3,10 @@ import { reduce } from 'lodash';
 
 
 const sizes = {
-    desktop: 1280,
-    tablet: 720,
-    mobile: 500,
+    desktop: 1024,
+    tablet: 768,
+    mobile: 600,
+    smallMobile: 320
 }
 
 export const media = Object.keys(sizes).reduce(

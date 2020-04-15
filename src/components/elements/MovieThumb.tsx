@@ -1,8 +1,19 @@
 import React from 'react'
+import StyledMovieThumb from '../styled/StyledMovieThumb';
 
-const MovieThumb = () => {
+type Props = {
+    image: string;
+    clickable?: boolean;
+}
+
+const MovieThumb = (props: Props) => {
+    const {image, clickable = false} = props;
     return (
-        <div>MovieThumb</div>
+    
+            <StyledMovieThumb> 
+                <img src={image} alt='moviethumb' className={clickable ? 'clickable' : ''}    />
+            </StyledMovieThumb>
+    
     )
 }
 
