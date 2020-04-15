@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cover as StyledCover } from '../styled/Cover.styled';
+import { StyledCover } from '../styled/StyledCover';
 
 const Cover = ({ image, title, description }) => {
 	return (

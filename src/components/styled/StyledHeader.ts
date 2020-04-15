@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { media } from './mixin.styled';
 
 
-export const Header = styled.div`
+export const StyledHeader = styled.div`
     background: #1c1c1c;
     padding: 0 20px;
 
@@ -18,9 +18,6 @@ export const Header = styled.div`
             min-height: 0px;
         `}
 
-        /* @media screen and (max-width: 500px) {
-            min-height: 0px;
-        } */
     }
 `
 

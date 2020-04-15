@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { media } from './mixin.styled';
 
-export const Cover = styled.div`
+export const StyledCover = styled.div`
 	background: ${(props: { image: string }) =>
 		`linear-gradient(
       to bottom, rgba(0,0,0,0)
@@ -14,10 +14,12 @@ export const Cover = styled.div`
 	background-position: center, center !important;
 	width: 100%;
 	height: 600px;
-	position: relative;
 	animation: animateCover 1s;
 	.cover-content {
 		max-width: 1280px;
+		display: flex;
+		flex-direction: column-reverse;
+		height: 100%;
 		padding: 20px;
 		margin: 0 auto;
 	}
@@ -25,7 +27,6 @@ export const Cover = styled.div`
 	.cover-description {
 		z-index: 100;
 		max-width: 700px;
-		position: absolute;
 		bottom: 40px;
 		margin-right: 20px;
 		min-height: 100px;
@@ -55,7 +56,7 @@ export const Cover = styled.div`
             `}
 		}
 		${media.tablet`
-            max-width: 100px;
+            max-width: 200px;
     `}
 	}
 

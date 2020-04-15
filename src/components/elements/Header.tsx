@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header as StyledHeader, StyledRMDBLogo, StyledTMDBLogo } from '../styled/Header.styled'
+import { StyledHeader, StyledRMDBLogo, StyledTMDBLogo } from '../styled/StyledHeader'
 import RMDBLogo from '../images/reactMovie_logo.png';
 import TMDBLogo from '../images/tmdb_logo.svg';
 
