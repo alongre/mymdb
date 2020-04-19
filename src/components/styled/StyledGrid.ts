@@ -21,6 +21,8 @@ export const StyledGridContent = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 40px;
+  height: 900px;
+  overflow: auto
   /* position: relative; */
 
 

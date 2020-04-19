@@ -10,20 +10,26 @@ import MoviesGrid from './elements/MoviesGrid';
 import StyleLoadButton from './styled/StyledLoadButton';
 import useFetchMovies from './helpers/useFetchMovies';
 
-const POPULAR_END_POINT = `${API_URL}/movie/popular?api_key=${API_KEY}`
+const POPULAR_END_POINT = `${API_URL}/movie/popular?api_key=${API_KEY}`;
 const Home = () => {
-  const { 
-    fetchStatus, 
-    state: {movies, currentPage, coverMovie, totalPages, totalResults},
+  const {
+    fetchStatus,
+    state: { movies, currentPage, coverMovie, totalPages, totalResults },
     error,
-    fetchData } = useFetchMovies(POPULAR_END_POINT);
+    fetchData,
+  } = useFetchMovies(POPULAR_END_POINT);
+  const [page,setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const loadMoreMovies = () => {
-
-    if (currentPage + 1 < totalPages) {
-      fetchData(`${POPULAR_END_POINT}&page=${currentPage + 1}`)
+    if (page + 1 < totalPages) {
+      setPage(page + 1)
     }
-  }
+  };
+  useEffect(() => {
+    if (page > currentPage) {
+      fetchData(`${POPULAR_END_POINT}&page=${page}`);
+    }
+  }, [page])
 
   return (
     <Card>
@@ -35,13 +41,14 @@ const Home = () => {
             title={coverMovie.title}
             description={coverMovie.overview}
           />
-          <MoviesGrid header={searchTerm.length > 0 ? 'Search Results' : 'Popular Movies'} movies={movies} />
-          <StyleLoadButton onClick={loadMoreMovies}>
-            Load More Movies
-          </StyleLoadButton>
+          <MoviesGrid
+            header={searchTerm.length > 0 ? 'Search Results' : 'Popular Movies'}
+            movies={movies}
+            loadMoreMovies={loadMoreMovies}
+          />
         </>
       )}
-      {fetchStatus === 'loading' && <Spinner/>}
+      {fetchStatus === 'loading' && <Spinner />}
     </Card>
   );
 };
