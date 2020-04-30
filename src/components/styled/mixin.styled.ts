@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components'
-import { reduce } from 'lodash';
+import { css } from 'styled-components';
 
 
 const sizes = {

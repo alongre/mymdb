@@ -17,7 +17,6 @@ const MoviesGrid = (props: Props) => {
 
   const handleScroll = event => {
     const {scrollTop, scrollHeight, clientHeight} = event.currentTarget;
-    console.log(scrollHeight - scrollTop);
     if (scrollHeight - scrollTop < (clientHeight + SCROLL_OFFSET)) {
       loadMoreMovies()
     }

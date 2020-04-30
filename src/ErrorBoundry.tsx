@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 class ErrorBoundry extends React.Component<any,{
     error: any, errorInfo: any

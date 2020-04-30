@@ -13,6 +13,8 @@ export type MovieState = {
 
 const useFetchMovies = (url: string) => {
 	const [fetchStatus, setFetchStatus] = useState<FetchStatus>('init');
+	const [currentPage, setCurrentPage] = useState(1);
+	const [urlEndPoint, setUrlEndPoint] = useState(url)
 	const [state, setState] = useState<MovieState>({
 		currentPage: 0,
 		coverMovie: undefined,
@@ -21,32 +23,38 @@ const useFetchMovies = (url: string) => {
 		movies: []
 	})
 	const [error, setError] = useState(undefined);
-
-	const fetchData = async (urlEndPoint: string) => {
-		try {
-			setFetchStatus('loading');
-			const data: API_Response = await (await axios.get(urlEndPoint)).data;
-			
-			setState(prevState => {
-				return {
-				currentPage: data.page,
-				coverMovie: prevState.coverMovie  ? prevState.coverMovie : data.results[0],
-				totalResults: data.total_results,
-				totalPages: data.total_pages,
-				movies: [
-					...prevState.movies, ...data.results
-				]
-			}
-			});
-			setFetchStatus('ready');
-		} catch (error) {
-			setFetchStatus('error');
-			setError(error);
-		}
+	const fetchMovies = (page: number) => {
+		setCurrentPage(page)
 	} 
+	
 	useEffect(() => {
-		fetchData(url);
-	}, [url]);
-	return { state, error, fetchStatus, fetchData };
+
+		const fetchData = async () => {
+			try {
+				setFetchStatus('loading');
+				const data: API_Response = await (await axios.get(`${urlEndPoint}&page=${currentPage}`)).data;
+				
+				setState(prevState => {
+					return {
+					currentPage: data.page,
+					coverMovie: prevState.coverMovie  ? prevState.coverMovie : data.results[0],
+					totalResults: data.total_results,
+					totalPages: data.total_pages,
+					movies: [
+						...prevState.movies, ...data.results
+					]
+				}
+				});
+				setFetchStatus('ready');
+			} catch (error) {
+				setFetchStatus('error');
+				setError(error);
+			}
+		} 
+
+
+		fetchData();
+	}, [urlEndPoint,currentPage]);
+	return { state, error, fetchStatus, fetchMovies };
 };
 export default useFetchMovies;

@@ -1,22 +1,21 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { map } from 'lodash';
-import { API_URL, API_KEY, IMAGE_BASE_URL, BACKDROP_SIZE } from '../config';
-import Header from './elements/Header';
-import { Card } from './styled/Elements.styled';
-import { Movie, API_Response } from '../types/tmdb';
+import React, { useEffect, useState } from 'react';
 import Cover from '../components/elements/Cover';
-import Spinner from './elements/Spinner';
+import { API_KEY, API_URL, BACKDROP_SIZE, IMAGE_BASE_URL } from '../config';
+import AutoCompleteMovies from './elements/AutoCompleteMovies';
+import Header from './elements/Header';
 import MoviesGrid from './elements/MoviesGrid';
-import StyleLoadButton from './styled/StyledLoadButton';
+import Spinner from './elements/Spinner';
 import useFetchMovies from './helpers/useFetchMovies';
+import { Card } from './styled/Elements.styled';
 
 const POPULAR_END_POINT = `${API_URL}/movie/popular?api_key=${API_KEY}`;
+
+
 const Home = () => {
   const {
     fetchStatus,
     state: { movies, currentPage, coverMovie, totalPages, totalResults },
-    error,
-    fetchData,
+    fetchMovies,
   } = useFetchMovies(POPULAR_END_POINT);
   const [page,setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
@@ -27,9 +26,13 @@ const Home = () => {
   };
   useEffect(() => {
     if (page > currentPage) {
-      fetchData(`${POPULAR_END_POINT}&page=${page}`);
+      fetchMovies(page);
     }
-  }, [page])
+  }, [page, currentPage, fetchMovies])
+
+  const selectedItem = (val: any) => {
+    console.log(val);
+  }
 
   return (
     <Card>
@@ -41,6 +44,8 @@ const Home = () => {
             title={coverMovie.title}
             description={coverMovie.overview}
           />
+          {/* <SearchBar /> */}
+          <AutoCompleteMovies  onChange={selectedItem} />
           <MoviesGrid
             header={searchTerm.length > 0 ? 'Search Results' : 'Popular Movies'}
             movies={movies}
