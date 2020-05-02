@@ -11,7 +11,7 @@ export const StyledCover = styled.div`
     ),
     url(${props.image}), #1c1c1c`};
   background-size: 100%, cover;
-  background-position: center, center !important;
+  background-position: top;
   width: 100%;
   height: 600px;
   animation: animateCover 1s;

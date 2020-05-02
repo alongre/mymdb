@@ -30,6 +30,9 @@ export const StyledSearchBarContent = styled.div`
     color: #fff;
     /* z-index: 1000; */
   }
+  .fa-times-circle {
+    margin: auto 5px;
+  }
 
   input {
     font-family: 'Abel', sans-serif;

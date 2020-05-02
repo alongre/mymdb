@@ -1,24 +1,27 @@
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import Downshift from 'downshift';
 import { debounce } from 'lodash';
 import React, { useRef, useState } from 'react';
-import { IMAGE_BASE_URL, POSTER_SMALL_SIZE, SEARCH_BASE_URL } from '../../config';
+import {
+  IMAGE_BASE_URL,
+  POSTER_SMALL_SIZE,
+  SEARCH_BASE_URL,
+} from '../../config';
 import { API_Response, Movie } from '../../types/tmdb';
 import noLogo from '../images/no_image_logo.jpg';
-import { StyledDropdown, StyledDropdownItem, StyledSearchBar, StyledSearchBarContent } from '../styled/StyledSearchBar';
+import {
+  StyledDropdown,
+  StyledDropdownItem,
+  StyledSearchBar,
+  StyledSearchBarContent,
+} from '../styled/StyledSearchBar';
 import MovieLogo from './MovieLogo';
 
 type OptionType = {
   value?: string;
 };
-
-
-
-
-
-
 
 const getMovieItem = (movie: Movie) => {
   return (
@@ -41,7 +44,9 @@ const AutoCompleteMovies = ({ onChange }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
 
   const handleInput = (event: React.FormEvent<HTMLInputElement>) => {
-    setValue(event.currentTarget.value?.length > 0 ? event.currentTarget.value : '');
+    setValue(
+      event.currentTarget.value?.length > 0 ? event.currentTarget.value : ''
+    );
     debounceSearch.current(event.currentTarget.value);
     if (event.currentTarget.value.length === 0) {
       setMovies([]);
@@ -66,7 +71,7 @@ const AutoCompleteMovies = ({ onChange }) => {
           onChange(selectedItem ? selectedItem.title : '');
         }}
         itemToString={(item: any) => {
-            const movieSelection = item ? item.title : ''
+          const movieSelection = item ? item.title : '';
           setValue(movieSelection);
           return movieSelection;
         }}
@@ -81,52 +86,75 @@ const AutoCompleteMovies = ({ onChange }) => {
           toggleMenu,
           selectItem,
           openMenu,
+          closeMenu,
           getToggleButtonProps,
           inputValue, // we destructure this from Downshift
           clearSelection,
-        }) => (
-          <StyledSearchBar {...getRootProps()}>
-            <StyledSearchBarContent>
-              <FontAwesomeIcon
-                icon={faSearch}
-                size="2x"
-                name="search"
-                className="fa-search"
-              />
-              <input
-                {...getInputProps()}
-                onChange={(event) => {
-                  handleInput(event);
-                  clearSelection();
-                  openMenu();
-                }}
-                value={value}
-              />
-            </StyledSearchBarContent>
-            <StyledDropdown {...getMenuProps()}>
-              {isOpen &&
-                movies.map((movie, index) => (
-                  <StyledDropdownItem
-                    {...getItemProps({
-                      style: {
-                        backgroundColor:
-                          index === highlightedIndex
-                            ? 'darkslategray'
-                            : undefined,
-                      },
-                      item: movie,
-                      index,
-                      key: movie.id,
-                    })}
-                    onClick={() => selectItem(movie)}
-                  >
-                    {getMovieItem(movie)}
-                
-                  </StyledDropdownItem>
-                ))}
-            </StyledDropdown>
-          </StyledSearchBar>
-        )}
+        }) => {
+          const clear = () => {
+            clearSelection();
+            setValue('');
+            setMovies([]);
+          };
+          return (
+            <StyledSearchBar {...getRootProps()}>
+              <StyledSearchBarContent>
+                <FontAwesomeIcon
+                  icon={faSearch}
+                  size="2x"
+                  name="search"
+                  className="fa-search"
+                />
+                <input
+                  {...getInputProps({
+                    onKeyDown(e) {
+                      if (e.key === 'Enter' && highlightedIndex === null) {
+                        closeMenu();
+                        value.length > 0 && onChange(value);
+                      }
+                    },
+                  })}
+                  onChange={(event) => {
+                    handleInput(event);
+                    clearSelection();
+                    openMenu();
+                  }}
+                  value={value}
+                />
+                {value.length > 0 && (
+                  <FontAwesomeIcon
+                    icon={faTimesCircle}
+                    size="2x"
+                    name="clear"
+                    className="fa-times-circle"
+                    onClick={clear}
+                  />
+                )}
+              </StyledSearchBarContent>
+              <StyledDropdown {...getMenuProps()}>
+                {isOpen &&
+                  movies.map((movie, index) => (
+                    <StyledDropdownItem
+                      {...getItemProps({
+                        style: {
+                          backgroundColor:
+                            index === highlightedIndex
+                              ? 'darkslategray'
+                              : undefined,
+                        },
+                        item: movie,
+                        index,
+                        key: movie.id,
+                      })}
+                      onClick={() => selectItem(movie)}
+                    >
+                      {getMovieItem(movie)}
+                    </StyledDropdownItem>
+                  ))}
+              </StyledDropdown>
+            </StyledSearchBar>
+          );
+        }}
       </Downshift>
     </div>
   );
