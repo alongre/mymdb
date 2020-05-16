@@ -3,8 +3,8 @@ import {
   StyledSearchBar,
   StyledSearchBarContent,
 } from '../styled/StyledSearchBar';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faSearch} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const SearchBar = () => {
   return (

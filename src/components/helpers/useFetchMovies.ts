@@ -1,7 +1,7 @@
-import { useState, useEffect, useMemo } from 'react';
+import {useState, useEffect, useMemo} from 'react';
 import axios from 'axios';
-import { API_Response, Movie } from '../../types/tmdb';
-import { POPULAR_BASE_URL, SEARCH_BASE_URL } from '../../config';
+import {API_Response, Movie} from '../../types/tmdb';
+import {POPULAR_BASE_URL, SEARCH_BASE_URL} from '../../config';
 
 export type FetchStatus = 'init' | 'loading' | 'ready' | 'error';
 export type MovieState = {
@@ -66,6 +66,6 @@ const useFetchMovies = () => {
 
     fetchData();
   }, [urlEndPoint, currentPage]);
-  return { state, error, fetchStatus, fetchMovies };
+  return {state, error, fetchStatus, fetchMovies};
 };
 export default useFetchMovies;

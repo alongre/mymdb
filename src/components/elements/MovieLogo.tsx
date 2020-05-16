@@ -6,7 +6,7 @@ type Props = {
 };
 
 const MovieLogo = (props: Props) => {
-  const { image } = props;
+  const {image} = props;
   return (
     <StyledMovieLogo>
       <img src={image} alt="movie-logo" />

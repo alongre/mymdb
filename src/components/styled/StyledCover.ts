@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { media } from './mixin.styled';
+import {media} from './mixin.styled';
 
 export const StyledCover = styled.div`
-  background: ${(props: { image: string }) =>
+  background: ${(props: {image: string}) =>
     `linear-gradient(
       to bottom, rgba(0,0,0,0)
       39%,rgba(0,0,0,0)

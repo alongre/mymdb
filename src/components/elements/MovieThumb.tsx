@@ -7,7 +7,7 @@ type Props = {
 };
 
 const MovieThumb = (props: Props) => {
-  const { image, clickable = false } = props;
+  const {image, clickable = false} = props;
   return (
     <StyledMovieThumb>
       <img

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { media } from './mixin.styled';
+import {media} from './mixin.styled';
 
 export const StyledGrid = styled.div`
   max-width: 1280px;

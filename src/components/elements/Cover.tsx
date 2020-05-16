@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyledCover } from '../styled/StyledCover';
+import {StyledCover} from '../styled/StyledCover';
 
-const Cover = ({ image, title, description }) => {
+const Cover = ({image, title, description}) => {
   return (
     <StyledCover image={image}>
       <div className="cover-content">

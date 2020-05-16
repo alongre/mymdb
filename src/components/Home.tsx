@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Cover from '../components/elements/Cover';
-import { BACKDROP_SIZE, IMAGE_BASE_URL } from '../config';
+import {BACKDROP_SIZE, IMAGE_BASE_URL} from '../config';
 import AutoCompleteMovies from './elements/AutoCompleteMovies';
 import Header from './elements/Header';
 import MoviesGrid from './elements/MoviesGrid';
 import Spinner from './elements/Spinner';
 import useFetchMovies from './helpers/useFetchMovies';
-import { Card } from './styled/Elements.styled';
+import {Card} from './styled/Elements.styled';
 
 const Home = () => {
   const {
     fetchStatus,
-    state: { movies, currentPage, coverMovie, totalPages },
+    state: {movies, currentPage, coverMovie, totalPages},
     fetchMovies,
   } = useFetchMovies();
   const [page, setPage] = useState(1);

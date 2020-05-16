@@ -1,9 +1,9 @@
 import React from 'react';
-import { Movie } from '../../types/tmdb';
-import { StyledGrid, StyledGridContent } from '../styled/StyledGrid';
+import {Movie} from '../../types/tmdb';
+import {StyledGrid, StyledGridContent} from '../styled/StyledGrid';
 import noImage from '../images/no_image.jpg';
 import MovieThumb from './MovieThumb';
-import { IMAGE_BASE_URL, POSTER_SIZE } from '../../config';
+import {IMAGE_BASE_URL, POSTER_SIZE} from '../../config';
 
 type Props = {
   movies: Movie[];
@@ -13,10 +13,10 @@ type Props = {
 const SCROLL_OFFSET = 20;
 
 const MoviesGrid = (props: Props) => {
-  const { movies, header, loadMoreMovies } = props;
+  const {movies, header, loadMoreMovies} = props;
 
   const handleScroll = (event) => {
-    const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
+    const {scrollTop, scrollHeight, clientHeight} = event.currentTarget;
     if (scrollHeight - scrollTop < clientHeight + SCROLL_OFFSET) {
       loadMoreMovies();
     }

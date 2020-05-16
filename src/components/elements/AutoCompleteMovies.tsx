@@ -1,15 +1,11 @@
-import { faSearch, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faSearch, faTimesCircle} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import Downshift from 'downshift';
-import { debounce } from 'lodash';
-import React, { useRef, useState } from 'react';
-import {
-  IMAGE_BASE_URL,
-  POSTER_SMALL_SIZE,
-  SEARCH_BASE_URL,
-} from '../../config';
-import { API_Response, Movie } from '../../types/tmdb';
+import {debounce} from 'lodash';
+import React, {useRef, useState} from 'react';
+import {IMAGE_BASE_URL, POSTER_SMALL_SIZE, SEARCH_BASE_URL} from '../../config';
+import {API_Response, Movie} from '../../types/tmdb';
 import noLogo from '../images/no_image_logo.jpg';
 import {
   StyledDropdown,
@@ -34,18 +30,18 @@ const getMovieItem = (movie: Movie) => {
         }
         key={movie.id}
       />
-      <span style={{ margin: 'auto 0px' }}>{movie.title}</span>
+      <span style={{margin: 'auto 0px'}}>{movie.title}</span>
     </>
   );
 };
 
-const AutoCompleteMovies = ({ onChange }) => {
+const AutoCompleteMovies = ({onChange}) => {
   const [value, setValue] = useState('');
   const [movies, setMovies] = useState<Movie[]>([]);
 
   const handleInput = (event: React.FormEvent<HTMLInputElement>) => {
     setValue(
-      event.currentTarget.value?.length > 0 ? event.currentTarget.value : ''
+      event.currentTarget.value?.length > 0 ? event.currentTarget.value : '',
     );
     debounceSearch.current(event.currentTarget.value);
     if (event.currentTarget.value.length === 0) {
@@ -61,11 +57,11 @@ const AutoCompleteMovies = ({ onChange }) => {
         ).data;
         setMovies(data.results);
       }
-    }, 1000)
+    }, 1000),
   );
 
   return (
-    <div style={{ zIndex: 1000 }}>
+    <div style={{zIndex: 1000}}>
       <Downshift
         onChange={(selectedItem) => {
           onChange(selectedItem ? selectedItem.title : '');
