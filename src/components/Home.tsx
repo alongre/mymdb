@@ -22,11 +22,11 @@ const Home = () => {
     }
   };
   useEffect(() => {
-      fetchMovies(page, searchTerm);
+    fetchMovies(page, searchTerm);
   }, [page, currentPage, fetchMovies, searchTerm]);
 
   const selectedItem = (val: any) => {
-    setPage(1)
+    setPage(1);
     setSearchTerm(val);
   };
 

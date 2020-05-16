@@ -8,24 +8,22 @@ import { IMAGE_BASE_URL, POSTER_SIZE } from '../../config';
 type Props = {
   movies: Movie[];
   header: string;
-  loadMoreMovies: () => void
+  loadMoreMovies: () => void;
 };
-const SCROLL_OFFSET = 20
+const SCROLL_OFFSET = 20;
 
 const MoviesGrid = (props: Props) => {
   const { movies, header, loadMoreMovies } = props;
 
-  const handleScroll = event => {
-    const {scrollTop, scrollHeight, clientHeight} = event.currentTarget;
-    if (scrollHeight - scrollTop < (clientHeight + SCROLL_OFFSET)) {
-      loadMoreMovies()
+  const handleScroll = (event) => {
+    const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
+    if (scrollHeight - scrollTop < clientHeight + SCROLL_OFFSET) {
+      loadMoreMovies();
     }
-    
-  }
-
+  };
 
   return (
-    <StyledGrid >
+    <StyledGrid>
       <h1>{header}</h1>
       <StyledGridContent onScroll={handleScroll}>
         {movies.map((movie) => (

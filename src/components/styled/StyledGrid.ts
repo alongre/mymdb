@@ -10,10 +10,9 @@ export const StyledGrid = styled.div`
     font-family: 'Abel', sans-serif;
     font-size: 42px;
 
-    ${media.tablet `
+    ${media.tablet`
         font-size: 22px
     `}
-
   }
 `;
 
@@ -23,7 +22,4 @@ export const StyledGridContent = styled.div`
   grid-gap: 40px;
   height: 900px;
   overflow: auto;
-
-
-
 `;

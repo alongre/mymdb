@@ -4,13 +4,14 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ErrorBoundry from './ErrorBoundry';
 
-
 ReactDOM.render(
   <React.StrictMode>
-  <ErrorBoundry>
-     <App/>
-  </ErrorBoundry>
-</React.StrictMode>, document.getElementById('root'));
+    <ErrorBoundry>
+      <App />
+    </ErrorBoundry>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls. Learn

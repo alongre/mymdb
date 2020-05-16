@@ -29,6 +29,7 @@
   },
   "scripts": {
     "start": "react-scripts start webpack-dev-server --hot",
+    "format": "prettier --write \"**/*.+(ts|tsx)\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

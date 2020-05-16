@@ -1,18 +1,21 @@
-import React from 'react'
-import { StyledHeader, StyledRMDBLogo, StyledTMDBLogo } from '../styled/StyledHeader'
+import React from 'react';
+import {
+  StyledHeader,
+  StyledRMDBLogo,
+  StyledTMDBLogo,
+} from '../styled/StyledHeader';
 import RMDBLogo from '../images/reactMovie_logo.png';
 import TMDBLogo from '../images/tmdb_logo.svg';
 
-
 const Header = () => {
-    return (
-        <StyledHeader>
-            <div className='header-content'>
-               <StyledRMDBLogo src={RMDBLogo} alt="rmdb-logo"/>
-               <StyledTMDBLogo src={TMDBLogo} alt="tmdb-logo"/> 
-            </div>
-        </StyledHeader>
-    )
-}
+  return (
+    <StyledHeader>
+      <div className="header-content">
+        <StyledRMDBLogo src={RMDBLogo} alt="rmdb-logo" />
+        <StyledTMDBLogo src={TMDBLogo} alt="tmdb-logo" />
+      </div>
+    </StyledHeader>
+  );
+};
 
-export default Header
+export default Header;

@@ -6,9 +6,7 @@ export const StyledSearchBar = styled.div`
   height: 90px;
   background: #1c1c1c;
   padding: 20px;
-  /* box-sizing: border-box; */
   color: #fff;
-  /* display: flex; */
 `;
 
 export const StyledSearchBarContent = styled.div`
@@ -55,7 +53,7 @@ export const StyledSearchBarContent = styled.div`
 `;
 
 export const StyledDropdown = styled.ul`
-max-width: 1280px;
+  max-width: 1280px;
   width: 100%;
   z-index: 1000;
   font-family: 'Abel', sans-serif;

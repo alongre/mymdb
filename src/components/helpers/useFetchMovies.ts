@@ -17,7 +17,9 @@ const useFetchMovies = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const urlEndPoint = useMemo(() => {
-    return searchTerm.length > 0 ? SEARCH_BASE_URL + searchTerm : POPULAR_BASE_URL;
+    return searchTerm.length > 0
+      ? SEARCH_BASE_URL + searchTerm
+      : POPULAR_BASE_URL;
   }, [searchTerm]);
 
   const [state, setState] = useState<MovieState>({
@@ -29,14 +31,14 @@ const useFetchMovies = () => {
   });
   const [error, setError] = useState(undefined);
   const fetchMovies = (page: number, search = '') => {
-      setCurrentPage(page);
-      setSearchTerm(search);
+    setCurrentPage(page);
+    setSearchTerm(search);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-		setFetchStatus('loading');
+        setFetchStatus('loading');
         const data: API_Response = await (
           await axios.get(`${urlEndPoint}&page=${currentPage}`)
         ).data;
