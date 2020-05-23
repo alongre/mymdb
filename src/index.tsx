@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import ErrorBoundry from './ErrorBoundry';
+import ErrorBoundry from './ErrorBoundary';
 
 ReactDOM.render(
   <React.StrictMode>

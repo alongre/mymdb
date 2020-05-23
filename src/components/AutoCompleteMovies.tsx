@@ -4,15 +4,15 @@ import axios from 'axios';
 import Downshift from 'downshift';
 import {debounce} from 'lodash';
 import React, {useRef, useState} from 'react';
-import {IMAGE_BASE_URL, POSTER_SMALL_SIZE, SEARCH_BASE_URL} from '../../config';
-import {API_Response, Movie} from '../../types/tmdb';
-import noLogo from '../images/no_image_logo.jpg';
+import {IMAGE_BASE_URL, POSTER_SMALL_SIZE, SEARCH_BASE_URL} from '../config';
+import {API_Response, Movie} from '../types/tmdb';
+import noLogo from './images/no_image_logo.jpg';
 import {
   StyledDropdown,
   StyledDropdownItem,
   StyledSearchBar,
   StyledSearchBarContent,
-} from '../styled/StyledSearchBar';
+} from './styled/StyledSearchBar';
 import MovieLogo from './MovieLogo';
 
 type OptionType = {

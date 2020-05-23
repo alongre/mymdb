@@ -1,5 +1,5 @@
 import React from 'react';
-import StyledMovieLogo from '../styled/StyledMovieLogo';
+import StyledMovieLogo from './styled/StyledMovieLogo';
 
 type Props = {
   image: string;

@@ -1,14 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import Cover from '../components/elements/Cover';
-import {BACKDROP_SIZE, IMAGE_BASE_URL} from '../config';
-import AutoCompleteMovies from './elements/AutoCompleteMovies';
+import {BACKDROP_SIZE, IMAGE_BASE_URL, POSTER_SIZE} from '../config';
+import AutoCompleteMovies from './AutoCompleteMovies';
 import Header from './elements/Header';
-import MoviesGrid from './elements/MoviesGrid';
+import Grid from './elements/Grid';
 import Spinner from './elements/Spinner';
-import useFetchMovies from './helpers/useFetchMovies';
+import useFetchMovies from './hooks/useFetchMovies';
 import {Card} from './styled/Elements.styled';
+import {RouteComponentProps} from '@reach/router';
+import ImageThumb from './ImageThumb';
+import noImage from './images/no_image.jpg';
 
-const Home = () => {
+const Home = ({...RouteComponentProps}) => {
   const {
     fetchStatus,
     state: {movies, currentPage, coverMovie, totalPages},
@@ -32,7 +35,6 @@ const Home = () => {
 
   return (
     <Card>
-      <Header />
       {movies && coverMovie && (
         <>
           <Cover
@@ -41,11 +43,23 @@ const Home = () => {
             description={coverMovie.overview}
           />
           <AutoCompleteMovies onChange={selectedItem} />
-          <MoviesGrid
+          <Grid
             header={searchTerm.length > 0 ? 'Search Results' : 'Popular Movies'}
-            movies={movies}
-            loadMoreMovies={loadMoreMovies}
-          />
+            loadMoreData={loadMoreMovies}
+          >
+            {movies.map((movie) => (
+              <ImageThumb
+                image={
+                  movie.poster_path
+                    ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}`
+                    : noImage
+                }
+                key={movie.id}
+                imageId={movie.id}
+                clickable={false}
+              />
+            ))}
+          </Grid>
         </>
       )}
       {fetchStatus === 'loading' && <Spinner />}

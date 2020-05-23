@@ -1,4 +1,4 @@
-import {useState, useEffect, useMemo} from 'react';
+import {useState, useEffect, useMemo, useCallback} from 'react';
 import axios from 'axios';
 import {API_Response, Movie} from '../../types/tmdb';
 import {POPULAR_BASE_URL, SEARCH_BASE_URL} from '../../config';
@@ -30,19 +30,16 @@ const useFetchMovies = () => {
     movies: [],
   });
   const [error, setError] = useState(undefined);
-  const fetchMovies = (page: number, search = '') => {
-    setCurrentPage(page);
-    setSearchTerm(search);
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = useCallback(
+    async () => {
       try {
+        setError(undefined);
         setFetchStatus('loading');
-        const data: API_Response = await (
-          await axios.get(`${urlEndPoint}&page=${currentPage}`)
-        ).data;
-
+        const result = await (
+          axios.get(`${urlEndPoint}&page=${currentPage}`)
+        );
+        const data: API_Response = result.data;
+      
         setState((prevState) => {
           return {
             currentPage: data.page,
@@ -62,10 +59,17 @@ const useFetchMovies = () => {
         setFetchStatus('error');
         setError(error);
       }
-    };
+    },
+    [urlEndPoint, currentPage],
+  )
+  const fetchMovies = (page: number, search = '') => {
+    setCurrentPage(page);
+    setSearchTerm(search);
+  };
 
+  useEffect(() => {
     fetchData();
-  }, [urlEndPoint, currentPage]);
+  }, [fetchData]);
   return {state, error, fetchStatus, fetchMovies};
 };
 export default useFetchMovies;
